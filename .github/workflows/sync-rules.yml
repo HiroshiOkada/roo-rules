@@ -1,0 +1,40 @@
+name: Sync rules-only branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Sync rules to rules-only branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Create a temporary directory to build the rules-only branch content
+          TEMP_DIR="rules-only-temp"
+          mkdir $TEMP_DIR
+          
+          # Copy rule directories to the temp directory
+          cp -r rules $TEMP_DIR/
+          cp -r rules-architect $TEMP_DIR/
+          cp -r rules-code $TEMP_DIR/
+          cp -r rules-debug $TEMP_DIR/
+          cp -r .roo $TEMP_DIR/
+          
+          # Switch to the temp directory and create a new git repo
+          cd $TEMP_DIR
+          git init
+          git add .
+          git commit -m "Update rules from main branch"
+          
+          # Force push the content to the rules-only branch
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:rules-only
