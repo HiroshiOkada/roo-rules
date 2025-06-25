@@ -1,0 +1,44 @@
+---
+description: 個人プロジェクト用ディレクトリ構造
+globs: 
+alwaysApply: false
+---
+---
+description: 小規模開発用の合理化されたプロジェクト構造
+globs: 
+alwaysApply: false
+---     
+# 個人プロジェクト用ディレクトリ構造
+
+```mermaid
+flowchart TD
+    Root[プロジェクトルート]
+    Root --> Docs[docs/]
+    Root --> Src[src/]
+    Root --> RooConfig[.roo/]
+    Root --> Git[.git/]
+    
+    Docs --> Spec[SPEC.md]
+    Docs --> Plan[PLAN.md] 
+    Docs --> DevLog[DEV_LOG.md]
+    
+    Src --> Code[ソースコードファイル]
+    
+    RooConfig --> Rules[rules/]
+    RooConfig --> Architect[rules-architect/]
+    RooConfig --> CodeRules[rules-code/]
+```
+
+## 基本構造
+- **docs/** - 全プロジェクトドキュメント
+- **src/** - ソースコードと実装
+- **.roo/** - Roo設定とルール
+- **.git/** - Gitバージョン管理
+
+## オプション追加（必要に応じて）
+- **tests/** - 専用テストディレクトリ（テストが大規模になった場合）
+- **config/** - 設定ファイル
+- **scripts/** - ビルドやユーティリティスクリプト
+- **assets/** - 静的アセットやリソース
+
+構造は最小限に保ち、プロジェクトのニーズに応じて有機的に成長させます。

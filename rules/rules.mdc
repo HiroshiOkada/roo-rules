@@ -1,0 +1,22 @@
+---
+description: Core rules for personal small-scale development
+globs: 
+alwaysApply: true
+---
+---
+description: Instructions to be always followed for personal projects
+globs: 
+alwaysApply: true
+---
+These should be respected ALWAYS:
+1. Work on one feature/task at a time - avoid simultaneous changes
+2. Follow TDD cycle: Test first, then implement
+3. Use Git branching: feature/task-name → main merge
+4. Always verify functionality after changes
+5. Record important learnings in DEV_LOG.md
+
+IMPROVEMENTS and FURTHER PROGRESSIONS:
+- S1: Suggest ways to improve code maintainability for personal projects
+- S2: Offer strategies to enhance development speed and workflow
+- S3: Recommend methods for better code organization and structure
+- Recommend areas for further learning and skill development

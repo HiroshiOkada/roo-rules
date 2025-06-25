@@ -1,0 +1,99 @@
+---
+description: 個人プロジェクト用TDD + Git実装ルール
+globs: 
+alwaysApply: false
+---
+---
+description: TDDとGit統合による合理化実装ワークフロー
+globs: 
+alwaysApply: true
+---
+実装タスクの前に必ず3つのことを行う:
+a. `docs/PLAN.md`から現在のタスクを読む
+b. `docs/SPEC.md`からプロジェクトコンテキストを理解する
+c. 現在のgitステータスを確認し、作業ディレクトリがクリーンであることを確認
+---
+# 実装ワークフロー（TDD + Git）
+
+## 開発サイクルプロトコル:
+
+### [ステップ1] タスク準備
+<TASK_SETUP>
+- PLAN.mdから次のタスクを選択
+- 現在のブランチが`main`で最新であることを確認
+- featureブランチ作成: `git checkout -b feature/task-name`
+- タスク要件と受け入れ基準を理解
+</TASK_SETUP>
+
+### [ステップ2] テストファースト開発
+<TDD_CYCLE>
+- 期待する機能を示す簡単なテストを作成
+- テストは最初は失敗するべき（レッドフェーズ）
+- テストは包括的でなく、機能的で集中したものにする
+- テストアプローチをコードコメントで文書化
+</TDD_CYCLE>
+
+### [ステップ3] 実装
+<IMPLEMENTATION>
+- テストを通すための最小限のコードを実装（グリーンフェーズ）
+- 以下の原則に従う:
+  - 関数は小さく、集中させる
+  - 明確で説明的な変数名を使用
+  - 複雑なロジックにはコメントを追加
+  - 一貫したコードスタイルを維持
+</IMPLEMENTATION>
+
+<LIBRARY_USAGE>
+- ライブラリ、フレームワーク、APIについて: MCPツール（Context7、deepwiki等）を使用して最新のドキュメントと実例を取得
+- 現在のベストプラクティスと最新の変更を確認
+- あなたの技術スタックとの互換性をチェック
+- 実装詳細については公式ドキュメントを参照
+</LIBRARY_USAGE>
+
+### [ステップ4] 検証
+<VERIFICATION>
+- テストが通ることを確認
+- 機能が期待通りに動作することを手動で確認
+- 既存機能が壊れていないことをチェック
+- 基本的な統合テストを実行
+</VERIFICATION>
+
+### [ステップ5] Git統合
+<GIT_WORKFLOW>
+- 変更をステージング: `git add .`
+- 明確なメッセージでコミット: `git commit -m "feat: implement task-name"`
+- mainに切り替え: `git checkout main`
+- featureをマージ: `git merge feature/task-name`
+- featureブランチ削除: `git branch -d feature/task-name`
+</GIT_WORKFLOW>
+
+### [ステップ6] ドキュメント更新
+<DOCUMENTATION>
+- PLAN.mdでタスクを完了済みにマーク
+- 重要な学びがあればDEV_LOG.mdにエントリー追加
+- タスクステータス更新と次のタスク選択
+</DOCUMENTATION>
+
+## Gitコミットメッセージ形式:
+- `feat: description` - 新機能
+- `fix: description` - バグ修正
+- `test: description` - テスト追加
+- `docs: description` - ドキュメント更新
+- `refactor: description` - コードリファクタリング
+
+## テストガイドライン:
+- ハッピーパスと基本的なエッジケースに集中
+- 内部実装でなく、パブリックインターフェースをテスト
+- テストはシンプルで読みやすく保つ
+- 説明的なテスト名を使用
+
+## コード品質原則:
+- **シンプルさ**: 巧妙さより単純な解決策を選ぶ
+- **可読性**: コードは自己文書化されるべき
+- **モジュール性**: 複雑なロジックをより小さな関数に分割
+- **一貫性**: コードベースで確立されたパターンに従う
+
+---
+実装タスクの後に必ず2つのことを行う:
+a. `docs/PLAN.md`で進捗を更新
+b. 該当する場合は`docs/DEV_LOG.md`に重要な学びを記録
