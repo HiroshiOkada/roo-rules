@@ -16,9 +16,13 @@ jobs:
 
       - name: Sync rules to rules-only branch
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+          # 最後に commit した author の情報を取得
+          AUTHOR_NAME=$(git log -1 --pretty=format:'%an')
+          AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+
+          git config --global user.name "$AUTHOR_NAME"
+          git config --global user.email "$AUTHOR_EMAIL"
+
           # Create a temporary directory to build the rules-only branch content
           TEMP_DIR="rules-only-temp"
           mkdir $TEMP_DIR
