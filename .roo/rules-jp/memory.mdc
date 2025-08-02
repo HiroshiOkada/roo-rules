@@ -1,0 +1,93 @@
+---
+description: 個人開発プロジェクト用メモリシステム
+globs: 
+alwaysApply: true
+---
+---
+description: 小規模プロジェクト用の3ファイル記憶管理システム
+globs: 
+alwaysApply: true
+---
+# 個人プロジェクト向けメモリファイル構造
+
+小規模プロジェクトの知識管理と開発進捗を管理するための簡素化された3ファイルアプローチを使用します。
+
+## コアファイル（必須）
+合計3ファイル:
+
+1. **SPEC.md** (docs/SPEC.md): プロジェクト仕様書
+   - プロジェクトの目標と成果物
+   - 技術スタックとアーキテクチャ決定
+   - 最終的な成果物と成功基準
+   - API仕様や主要インターフェース
+   - プロジェクト開始時に作成、要件変更時に更新
+
+2. **PLAN.md** (docs/PLAN.md): 実装計画
+   - 優先順位付きのタスク分解
+   - 開発マイルストーンと進捗追跡
+   - Gitブランチ戦略と現在のステータス
+   - タスク間の依存関係
+   - アーキテクトモードと開発進捗時に更新
+
+3. **DEV_LOG.md** (docs/DEV_LOG.md): 開発学習ログ
+   - 遭遇した問題の技術的解決策
+   - 重要な決定とその根拠
+   - 発見した有用なコードパターン
+   - デバッグの洞察と修正方法
+   - 重要な学びがあった時に更新
+
+## ファイル関係図
+```mermaid
+flowchart TD
+    SPEC[SPEC.md - プロジェクト要件] --> PLAN[PLAN.md - 実装タスク]
+    PLAN --> DEV[DEV_LOG.md - 学習と解決策]
+    DEV --> PLAN
+```
+
+## 開発ワークフローとの統合
+
+### Git統合
+- 各タスクはfeatureブランチに対応
+- ブランチ命名: feature/task-description
+- タスク完了と簡易テスト後のみmainにマージ
+
+### TDD統合
+- 各タスクは実装前にテスト作成を含む
+- 包括的ではなく簡潔な機能テスト
+- テスト基準はPLAN.mdに定義
+
+## コアワークフロー
+
+### アーキテクトモード（計画立案）
+```mermaid
+flowchart TD
+    Start[開始] --> ReadSpec[SPEC.md読み込み]
+    ReadSpec --> ReadPlan[現在のPLAN.md読み込み]
+    ReadPlan --> CreateTasks[実装可能なタスクに分解]
+    CreateTasks --> PrioritizeTasks[優先順位と依存関係設定]
+    PrioritizeTasks --> UpdatePlan[PLAN.md更新]
+```
+
+### コードモード（実装）
+```mermaid
+flowchart TD
+    Start[開始] --> ReadPlan[PLAN.md読み込み - 次のタスク]
+    ReadPlan --> CreateBranch[featureブランチ作成]
+    CreateBranch --> WriteTest[簡易テスト作成]
+    WriteTest --> Implement[機能実装]
+    Implement --> RunTest[テスト実行・検証]
+    RunTest --> Merge[mainにマージ]
+    Merge --> UpdateLog[必要時DEV_LOG.md更新]
+    UpdateLog --> UpdatePlan[PLAN.md進捗更新]
+```
+
+## ドキュメント更新
+
+メモリファイル更新が発生するタイミング:
+1. 新プロジェクト開始時（SPEC.mdと初期PLAN.md作成）
+2. 開発タスク完了時（PLAN.md進捗更新）
+3. 重要な技術的課題に遭遇時（DEV_LOG.md更新）
+4. 要件やアーキテクチャ変更時（SPEC.md更新）
+5. ユーザーが**update memory files**を要求時（全3ファイル確認）
+
+**update memory files**でトリガーされた場合、全3つのコアファイルの現在の正確性と完全性を確認します。

@@ -1,0 +1,93 @@
+---
+description: Memory system for personal development projects
+globs: 
+alwaysApply: true
+---
+---
+description: 3-file memory management system for small-scale projects
+globs: 
+alwaysApply: true
+---
+# Memory Files Structure for Personal Projects
+
+This system uses a simplified 3-file approach for managing project knowledge and development progress.
+
+## Core Files (Required)
+3 files total:
+
+1. **SPEC.md** (docs/SPEC.md): Project Specification
+   - What the project aims to achieve
+   - Technical stack and architecture decisions
+   - Final deliverables and success criteria
+   - API specifications or key interfaces
+   - Created at project start and updated when requirements change
+
+2. **PLAN.md** (docs/PLAN.md): Implementation Plan
+   - Broken down tasks with priorities
+   - Development milestones and progress tracking
+   - Git branch strategy and current status
+   - Dependencies between tasks
+   - Updated by architect mode and during development progress
+
+3. **DEV_LOG.md** (docs/DEV_LOG.md): Development Learning Log
+   - Technical solutions to problems encountered
+   - Important decisions and their rationale
+   - Useful code patterns discovered
+   - Debugging insights and fixes
+   - Updated when significant learnings occur
+
+## File Relationships
+```mermaid
+flowchart TD
+    SPEC[SPEC.md - Project Requirements] --> PLAN[PLAN.md - Implementation Tasks]
+    PLAN --> DEV[DEV_LOG.md - Learning & Solutions]
+    DEV --> PLAN
+```
+
+## Development Workflow Integration
+
+### Git Integration
+- Each task corresponds to a feature branch
+- Branch naming: feature/task-description
+- Merge to main only after task completion and simple testing
+
+### TDD Integration
+- Each task includes test creation before implementation
+- Simple functional tests, not comprehensive coverage
+- Test criteria defined in PLAN.md
+
+## Core Workflows
+
+### ARCHITECT MODE (Planning)
+```mermaid
+flowchart TD
+    Start[Start] --> ReadSpec[Read SPEC.md]
+    ReadSpec --> ReadPlan[Read current PLAN.md]
+    ReadPlan --> CreateTasks[Break down into implementable tasks]
+    CreateTasks --> PrioritizeTasks[Set priorities and dependencies]
+    PrioritizeTasks --> UpdatePlan[Update PLAN.md]
+```
+
+### CODE MODE (Implementation)
+```mermaid
+flowchart TD
+    Start[Start] --> ReadPlan[Read PLAN.md - next task]
+    ReadPlan --> CreateBranch[Create feature branch]
+    CreateBranch --> WriteTest[Write simple test]
+    WriteTest --> Implement[Implement feature]
+    Implement --> RunTest[Run test & verify]
+    RunTest --> Merge[Merge to main]
+    Merge --> UpdateLog[Update DEV_LOG.md if needed]
+    UpdateLog --> UpdatePlan[Update PLAN.md progress]
+```
+
+## Documentation Updates
+
+Memory Files updates occur when:
+1. Starting a new project (create SPEC.md and initial PLAN.md)
+2. Completing a development task (update PLAN.md progress)
+3. Encountering significant technical challenges (update DEV_LOG.md)
+4. Changing requirements or architecture (update SPEC.md)
+5. User requests **update memory files** (review all 3 files)
+
+When triggered by **update memory files**, review all 3 core files for current accuracy and completeness.

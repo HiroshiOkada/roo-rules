@@ -1,0 +1,70 @@
+---
+description: Python (uv) TDD + Git implementation rules with quality gates
+globs: ["*.py"]
+alwaysApply: true
+---
+# IMPLEMENTATION WORKFLOW (Python + TDD + Git)
+
+## Development Cycle Protocol:
+
+### [Step 1] TASK PREPARATION
+<TASK_SETUP>
+- Check `git status` to ensure the working branch is clean.
+- Select the next task from `docs/PLAN.md`.
+- Create a feature branch from the `develop` branch in the format `feature/task-name`:
+  `git checkout develop && git pull && git checkout -b feature/task-name`
+</TASK_SETUP>
+
+### [Step 2] TEST-FIRST DEVELOPMENT
+<TDD_CYCLE>
+- Write a simple test in the `tests/` directory that verifies the task requirements.
+- Confirm that the test fails initially (`Red`): `uv run pytest`
+</TDD_CYCLE>
+
+### [Step 3] IMPLEMENTATION
+<IMPLEMENTATION>
+- Implement the minimum code in the `src/` directory to make the test pass (`Green`).
+- Focus on readability and maintainability, following the DRY principle.
+</IMPLEMENTATION>
+
+### [Step 4] QUALITY & VERIFICATION
+<QUALITY_GATE>
+- **Before committing, all the following quality checks must pass.**
+
+1.  **Run Tests and Check Coverage**:
+    - `uv run pytest --cov=src`
+    - (Target: 80%+ coverage)
+
+2.  **Code Formatting (Black)**:
+    - `uv run black .`
+
+3.  **Static Analysis (Flake8)**:
+    - `uv run flake8 src/ tests/`
+
+4.  **Type Checking (Mypy)**:
+    - `uv run mypy src/`
+</QUALITY_GATE>
+
+### [Step 5] GIT INTEGRATION
+<GIT_WORKFLOW>
+- Once quality checks have passed, stage the changes: `git add .`
+- Commit with a Conventional Commits message: `git commit -m "feat: implement task-name"`
+- Merge into the `develop` branch:
+  `git checkout develop && git pull && git merge feature/task-name`
+- Delete the feature branch: `git branch -d feature/task-name`
+</GIT_WORKFLOW>
+
+### [Step 6] DOCUMENTATION UPDATE
+<DOCUMENTATION>
+- Update progress in `docs/PLAN.md` and `docs/DEV_LOG.md`.
+- (If necessary) Update `README.md` or `docs/spec.md`.
+</DOCUMENTATION>
+
+---
+## Git Commit Message Format:
+- `feat:` (new feature)
+- `fix:` (bug fix)
+- `docs:` (documentation)
+- `style:` (formatting)
+- `refactor:` (refactoring)
+- `test:` (adding or refactoring tests)

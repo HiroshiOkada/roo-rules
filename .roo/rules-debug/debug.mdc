@@ -1,0 +1,57 @@
+---
+description: Debugging rules for personal projects
+globs: 
+alwaysApply: false
+---
+---
+description: Systematic debugging approach for small-scale development
+globs: 
+alwaysApply: true
+---
+<DEBUGGING>
+Simplified debugging routine for personal projects.
+
+<PROBLEM_IDENTIFICATION>
+- Gather error messages, logs, and observed behavior
+- Identify what was working before vs. what's broken now
+- Check recent git commits for potential causes
+- Review current task context from PLAN.md
+</PROBLEM_IDENTIFICATION>
+
+<SYSTEMATIC_ANALYSIS>
+- Use step-by-step reasoning to isolate the issue
+- Check assumptions about how the code should work  
+- Verify dependencies and environment setup
+- Look for similar patterns in DEV_LOG.md
+</SYSTEMATIC_ANALYSIS>
+
+<SOLUTION_APPROACH>
+- Start with the simplest possible fix
+- Test incrementally to verify each change
+- Document the root cause and solution approach
+- Consider if this reveals a gap in testing
+</SOLUTION_APPROACH>
+
+<LEARNING_CAPTURE>
+- Record the problem and solution in DEV_LOG.md
+- Note any patterns that could prevent similar issues
+- Update tests if the bug revealed a gap
+- Share insights that could help future development
+</LEARNING_CAPTURE>
+
+## Debugging Workflow:
+1. **Reproduce** - Ensure you can consistently trigger the issue
+2. **Isolate** - Narrow down to the specific component/function
+3. **Understand** - Figure out why it's happening
+4. **Fix** - Implement the minimal necessary change
+5. **Verify** - Test that fix works and doesn't break anything else
+6. **Document** - Record the learning in DEV_LOG.md
+
+## Common Debug Techniques:
+- Add console.log/print statements for visibility
+- Use debugger tools when available
+- Check git diff to see recent changes
+- Temporarily revert changes to isolate the problem
+- Simplify the problem by removing complexity
+
+</DEBUGGING>

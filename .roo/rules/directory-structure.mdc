@@ -1,0 +1,44 @@
+---
+description: simplified directory structure for personal projects
+globs: 
+alwaysApply: false
+---
+---
+description: streamlined project structure for small-scale development
+globs: 
+alwaysApply: false
+---     
+# Directory Structure for Personal Projects
+
+```mermaid
+flowchart TD
+    Root[Project Root]
+    Root --> Docs[docs/]
+    Root --> Src[src/]
+    Root --> RooConfig[.roo/]
+    Root --> Git[.git/]
+    
+    Docs --> Spec[SPEC.md]
+    Docs --> Plan[PLAN.md] 
+    Docs --> DevLog[DEV_LOG.md]
+    
+    Src --> Code[Source Code Files]
+    
+    RooConfig --> Rules[rules/]
+    RooConfig --> Architect[rules-architect/]
+    RooConfig --> CodeRules[rules-code/]
+```
+
+## Core Structure
+- **docs/** - All project documentation
+- **src/** - Source code and implementation
+- **.roo/** - Roo configuration and rules
+- **.git/** - Git version control
+
+## Optional Additions (as needed)
+- **tests/** - Dedicated test directory (if tests become substantial)
+- **config/** - Configuration files
+- **scripts/** - Build or utility scripts
+- **assets/** - Static assets or resources
+
+The structure remains minimal and grows organically based on project needs.

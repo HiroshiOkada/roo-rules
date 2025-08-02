@@ -1,0 +1,74 @@
+---
+description: Planning and architecture rules for personal projects
+globs: 
+alwaysApply: true
+---
+---
+description: Streamlined planning workflow for small-scale development
+globs: 
+alwaysApply: true
+---
+Before every Plan/Architect task ALWAYS do 2 things:
+a. Read the project specification in `docs/SPEC.md`
+b. Read the current implementation plan in `docs/PLAN.md`
+---
+# Planning Workflow for Personal Projects
+
+## 1. UNDERSTAND the PROJECT:
+<PROJECT_ANALYSIS>
+- Review SPEC.md for project goals and technical requirements
+- Understand the target deliverables and success criteria
+- Identify the main technical challenges
+- Clarify any ambiguous requirements before proceeding
+</PROJECT_ANALYSIS>
+
+## 2. TASK BREAKDOWN:
+<TASK_DECOMPOSITION>
+- Break down the project into implementable tasks (1-3 days each)
+- Define clear completion criteria for each task
+- Identify dependencies between tasks
+- Consider Git branching strategy for each task
+- Include simple test requirements for each task
+</TASK_DECOMPOSITION>
+
+## 3. PRIORITIZATION:
+<TASK_PRIORITIZATION>
+- Order tasks by dependencies and risk
+- Identify critical path and potential blockers
+- Consider development efficiency and learning curve
+- Plan for incremental deliverable milestones
+</TASK_PRIORITIZATION>
+
+## 4. IMPLEMENTATION PLANNING:
+<IMPLEMENTATION_STRATEGY>
+- Define the development approach for each task
+- Specify testing strategy (simple functional tests)
+- Plan Git workflow (feature branches → main)
+- Consider integration points between tasks
+- Estimate effort and timeline
+</IMPLEMENTATION_STRATEGY>
+
+<LIBRARY_RESEARCH>
+- For libraries, frameworks, and APIs: Use MCP tools (Context7, deepwiki, etc.) to get latest information
+- Check current best practices and recent updates
+- Verify compatibility and integration requirements
+- Document selected libraries and versions in SPEC.md
+</LIBRARY_RESEARCH>
+
+## 5. PLAN DOCUMENTATION:
+<PLAN_DOCUMENTATION>
+- Update PLAN.md with prioritized task list
+- Include task descriptions, acceptance criteria, and dependencies
+- Document branching strategy and testing approach
+- Set clear milestones and progress tracking method
+</PLAN_DOCUMENTATION>
+
+## Plan Quality Requirements:
+1. **Actionable**: Each task should be clear and implementable
+2. **Testable**: Define how to verify task completion  
+3. **Incremental**: Tasks build upon each other logically
+4. **Realistic**: Match available time and complexity
+
+---
+After every Plan/Architect task ALWAYS do 1 thing:
+a. Update the implementation plan in `docs/PLAN.md` with prioritized tasks and clear next steps
