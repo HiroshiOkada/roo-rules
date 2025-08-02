@@ -1,99 +1,70 @@
 ---
-description: TDD + Git implementation rules for personal projects
-globs: 
-alwaysApply: false
----
----
-description: Streamlined implementation workflow with TDD and Git integration
-globs: 
+description: Python (uv) TDD + Git implementation rules with quality gates
+globs: ["*.py"]
 alwaysApply: true
 ---
-Before every implementation task ALWAYS do 3 things:
-a. Read the current task from `docs/PLAN.md`
-b. Understand the project context from `docs/SPEC.md`  
-c. Check current git status and ensure clean working directory
----
-# IMPLEMENTATION WORKFLOW (TDD + Git)
+# IMPLEMENTATION WORKFLOW (Python + TDD + Git)
 
 ## Development Cycle Protocol:
 
 ### [Step 1] TASK PREPARATION
 <TASK_SETUP>
-- Select next task from PLAN.md
-- Ensure current branch is `main` and up to date
-- Create feature branch: `git checkout -b feature/task-name`
-- Understand task requirements and acceptance criteria
+- Check `git status` to ensure the working branch is clean.
+- Select the next task from `docs/PLAN.md`.
+- Create a feature branch from the `develop` branch in the format `feature/task-name`:
+  `git checkout develop && git pull && git checkout -b feature/task-name`
 </TASK_SETUP>
 
 ### [Step 2] TEST-FIRST DEVELOPMENT
 <TDD_CYCLE>
-- Write simple test that demonstrates expected functionality
-- Test should fail initially (red phase)
-- Keep tests focused and functional, not comprehensive
-- Document test approach in code comments
+- Write a simple test in the `tests/` directory that verifies the task requirements.
+- Confirm that the test fails initially (`Red`): `uv run pytest`
 </TDD_CYCLE>
 
 ### [Step 3] IMPLEMENTATION
 <IMPLEMENTATION>
-- Implement minimum code to make test pass (green phase)
-- Follow these principles:
-  - Keep functions small and focused
-  - Use clear, descriptive variable names
-  - Add comments for complex logic
-  - Maintain consistent code style
+- Implement the minimum code in the `src/` directory to make the test pass (`Green`).
+- Focus on readability and maintainability, following the DRY principle.
 </IMPLEMENTATION>
 
-<LIBRARY_USAGE>
-- For libraries, frameworks, and APIs: Use MCP tools (Context7, deepwiki, etc.) to get latest documentation and examples
-- Verify current best practices and recent changes
-- Check compatibility with your tech stack
-- Reference official documentation for implementation details
-</LIBRARY_USAGE>
+### [Step 4] QUALITY & VERIFICATION
+<QUALITY_GATE>
+- **Before committing, all the following quality checks must pass.**
 
-### [Step 4] VERIFICATION
-<VERIFICATION>
-- Run tests to ensure they pass
-- Manually verify functionality works as expected
-- Check that no existing functionality is broken
-- Perform basic integration testing
-</VERIFICATION>
+1.  **Run Tests and Check Coverage**:
+    - `uv run pytest --cov=src`
+    - (Target: 80%+ coverage)
+
+2.  **Code Formatting (Black)**:
+    - `uv run black .`
+
+3.  **Static Analysis (Flake8)**:
+    - `uv run flake8 src/ tests/`
+
+4.  **Type Checking (Mypy)**:
+    - `uv run mypy src/`
+</QUALITY_GATE>
 
 ### [Step 5] GIT INTEGRATION
 <GIT_WORKFLOW>
-- Stage changes: `git add .`
-- Commit with clear message: `git commit -m "feat: implement task-name"`
-- Switch to main: `git checkout main`
-- Merge feature: `git merge feature/task-name`
-- Delete feature branch: `git branch -d feature/task-name`
+- Once quality checks have passed, stage the changes: `git add .`
+- Commit with a Conventional Commits message: `git commit -m "feat: implement task-name"`
+- Merge into the `develop` branch:
+  `git checkout develop && git pull && git merge feature/task-name`
+- Delete the feature branch: `git branch -d feature/task-name`
 </GIT_WORKFLOW>
 
 ### [Step 6] DOCUMENTATION UPDATE
 <DOCUMENTATION>
-- Update PLAN.md to mark task as completed
-- If significant learning occurred, add entry to DEV_LOG.md
-- Update task status and select next task
+- Update progress in `docs/PLAN.md` and `docs/DEV_LOG.md`.
+- (If necessary) Update `README.md` or `docs/spec.md`.
 </DOCUMENTATION>
 
-## Git Commit Message Format:
-- `feat: description` - New feature
-- `fix: description` - Bug fix
-- `test: description` - Test addition
-- `docs: description` - Documentation update
-- `refactor: description` - Code refactoring
-
-## Testing Guidelines:
-- Focus on happy path and basic edge cases
-- Test public interfaces, not internal implementation
-- Keep tests simple and readable
-- Use descriptive test names
-
-## Code Quality Principles:
-- **Simplicity**: Prefer simple solutions over clever ones
-- **Readability**: Code should be self-documenting
-- **Modularity**: Break complex logic into smaller functions
-- **Consistency**: Follow established patterns in the codebase
-
 ---
-After every implementation task ALWAYS do 2 things:
-a. Update progress in `docs/PLAN.md`
-b. Record important learnings in `docs/DEV_LOG.md` if applicable
+## Git Commit Message Format:
+- `feat:` (new feature)
+- `fix:` (bug fix)
+- `docs:` (documentation)
+- `style:` (formatting)
+- `refactor:` (refactoring)
+- `test:` (adding or refactoring tests)
